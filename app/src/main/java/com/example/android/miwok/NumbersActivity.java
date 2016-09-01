@@ -39,10 +39,26 @@ public class NumbersActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Word word = words.get(position);
-                Log.v("NumbersActivity",word.toString());
+                Log.v("NumbersActivity", word.toString());
+                releaseMediaPlayer();
                 mediaPlayer = MediaPlayer.create(NumbersActivity.this, word.getAudioResourceID());
                 mediaPlayer.start();
+                mediaPlayer.setOnCompletionListener(onCompletionListener);
             }
         });
     }
+
+    private void releaseMediaPlayer() {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+        }
+        mediaPlayer = null;
+    }
+
+    private MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            releaseMediaPlayer();
+        }
+    };
 }
