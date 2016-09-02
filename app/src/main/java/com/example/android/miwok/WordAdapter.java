@@ -21,7 +21,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
      */
     private int colorResourceId;
 
-    
+
     /**
      * Create a new {@link WordAdapter} object.
      *
